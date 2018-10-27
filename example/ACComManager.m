@@ -43,11 +43,6 @@
         
         NSURL *websocketUrl = [NSURL URLWithString:@"wss://10.0.0.1"];
         self.client = [[STOMPClient alloc] initWithURL:websocketUrl webSocketHeaders:nil useHeartbeat:YES];
-        [self.client disconnect:^(NSError *error) {
-            [self connectWithCompletion:^(BOOL succeeded) {
-                NSLog(succeeded ? @"Reconnection succeeded" : @"Reconnection unsucceeded");
-            }];
-        }];
         
         if (self.needToReconnect) {
             [NSTimer scheduledTimerWithTimeInterval:5 repeats:YES block:^(NSTimer * _Nonnull timer) {
