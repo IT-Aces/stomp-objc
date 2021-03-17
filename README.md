@@ -1,5 +1,6 @@
 # stomp-objc
-Objective C STOMP over WebSockets
+
+ObjectiveC STOMP over WebSockets
 
 Based on [jetfire](https://github.com/acmacalister/jetfire) and [WebsocketStompKit](https://github.com/rguldener/WebsocketStompKit)
 
@@ -9,13 +10,14 @@ Based on [jetfire](https://github.com/acmacalister/jetfire) and [WebsocketStompK
 
 Init
 
-```
+```objc
 NSURL *websocketUrl = [NSURL URLWithString:@"wss://10.0.0.1"];
 self.client = [[STOMPClient alloc] initWithURL:websocketUrl webSocketHeaders:nil useHeartbeat:YES];
 ```
 
-Connect
-```
+### Connect
+
+```objc
 - (void)connectWithCompletion:(void(^)(BOOL succeeded))completion {
     if (self.client && !self.client.connected) {
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
@@ -35,8 +37,9 @@ Connect
     }
 }
 ```
-Subscribe
-```
+
+### Subscribe
+```objc
 - (void)subscribeToTopic:(NSString *)topic messageHandler:(void(^)(NSString *message))messageHandler {
     if (topic && topic.length > 0 &&
         self.client && self.client.connected) {
